@@ -1,46 +1,4 @@
-// import React, { useState } from 'react'
-// import '../Components/Calculator.css'
 
-// function Calculator () {
-
-//     const [num1, setNum1] = useState('');
-//     const [num2, setNum2] = useState('');
-//     const [operation, setOperation] = useState('');
-//     const [result, setResult] = useState('');
-
-//     const handleOperation = async() => {
-//         const response = await fetch(`http://localhost:7077/${operation}`,{
-//             method:'POST',
-//             headers:{'Content-Type':'application/json'},
-//             body:JSON.stringify({Num1:parseFloat(num1),Num2:parseFloat(num2)})
-//         });
-//         const data = await response.json();
-//         setResult(data.result);
-//     }
-
-
-//   return (
-//     <div className='calculator'>
-//         <label >Num1</label><input type="number" value={num1} placeholder='enter first number' onChange={(e)=>setNum1(e.target.value)}/>
-//         <label >Operation</label>
-//         <select required onChange={(e)=>setOperation(e.target.value)}>
-//             <option value="logic">Select Operation</option>
-//             <option value="add">+</option>
-//             <option value="subtract">-</option>
-//             <option value="multiply">*</option>
-//             <option value="divide">/</option>
-//             </select>
-//             {/* <button value='add' onClick={(e)=>setOperation(e.target.value)}>+</button> */}
-//         <label >Num2</label><input type="number" value={num2} placeholder='enter second number' onChange={(e)=>setNum2(e.target.value)} />
-//         <button onClick={handleOperation}>Calculate</button>
-//         <div className='result'>
-//             Result : {result}
-//         </div>
-//     </div>
-//   )
-// }
-
-// export default Calculator
 
 import React, { useState } from 'react';
 import './Calculator.css';
@@ -53,7 +11,7 @@ function Calculator() {
 
   const handleNumberClick = (num) => {
     if (num === '.' && currentValue.includes('.')) {
-        return; // Do nothing if currentValue already contains a decimal
+        return;
       }
     if (display === '0' || currentValue === '0') {
       setDisplay(num);
@@ -63,12 +21,6 @@ function Calculator() {
       setCurrentValue(currentValue + num);
     }
   };
-
-//   const handleOperatorClick = (op) => {
-//     setOperator(op);
-//     setPreviousValue(display);
-//     setCurrentValue('');
-//   };
 
   const handleOperatorClick = (e) => {
     setOperator(e.target.value);
@@ -84,23 +36,6 @@ function Calculator() {
             body:JSON.stringify({Num1:parseFloat(previousValue),Num2:parseFloat(currentValue)})
         });
     
-    // let result;
-    // switch (operator) {
-    //   case '+':
-    //     result = parseFloat(previousValue) + parseFloat(currentValue);
-    //     break;
-    //   case '-':
-    //     result = parseFloat(previousValue) - parseFloat(currentValue);
-    //     break;
-    //   case '*':
-    //     result = parseFloat(previousValue) * parseFloat(currentValue);
-    //     break;
-    //   case '/':
-    //     result = parseFloat(previousValue) / parseFloat(currentValue);
-    //     break;
-    //   default:
-    //     return;
-    // }
     const data = await response.json();
     setDisplay(data.result);
     setCurrentValue(data.result);
